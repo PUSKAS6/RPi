@@ -15,20 +15,24 @@ GPIO.setup(b2,GPIO.IN,pull_up_down=GPIO.PUD_UP)
 GPIO.setup(LEDPin,GPIO.OUT)
 myPWM=GPIO.PWM(LEDPin,100)
 myPWM.start(DC)
+BP=10
 try:
 	while True:
 		b1State=GPIO.input(b1)
 		b2State=GPIO.input(b2)
 		if b1StateOld==0 and b1State==1:
-			DC=DC-10
+			BP=BP-1
+			DC=(1.5849)**BP
 			print('Dim Event')
 		if b2StateOld==0 and b2State==1:
-			DC=DC+10
+			BP=BP+1
+			DC=(1.5849)**BP
 			print('Bright Event')
 		if DC>99:
 			DC=99
 		if DC<0:
 			DC=0
+		print(DC)
 		myPWM.ChangeDutyCycle(DC)
 		b1StateOld=b1State
 		b2StateOld=b2State

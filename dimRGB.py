@@ -1,4 +1,4 @@
-
+from vpython import *
 import RPi.GPIO as GPIO
 from time import sleep
 dt=.1
@@ -39,8 +39,10 @@ myPWMr.start(int(DCr))
 myPWMg.start(int(DCg))
 myPWMb.start(int(DCb))
 
+mySphere=sphere(color=color.red, radius=1)
 try:
 	while True:
+		rate(20)
 		rButState=GPIO.input(rBut)
 		gButState=GPIO.input(gBut)
 		bButState=GPIO.input(bBut)
